@@ -28,7 +28,7 @@ jobs:
         pyinstaller --onefile sudoku_printer.py
 
     - name: Upload executable artifact
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: sudoku_printer_exe
         path: dist/sudoku_printer.exe
