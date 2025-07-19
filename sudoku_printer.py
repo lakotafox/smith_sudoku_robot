@@ -6,10 +6,10 @@ from reportlab.lib.pagesizes import letter  # tool for "standerd" letter page si
 
 import os # conjure operating system tools IDFK what this does tbh
 
-import subprocess #subprocess... tool used to run puter "user style" commands,  like "printing" automatically maybe idfk
+import subprocess #subprocess... tool used to run puter "user style" commands (wtf am I saying),  stuff user does like "printing" puter does automatically with this tool... maybe idfk
 
 
-#mother of all sudoku generation methods/functions. (cob creates personal tool)
+#mother of all sudoku generation methods/functions. (cob creates personal tool tis algorithm) will be used for program l8r
 def generate_sudoku():
     base = 3                  # size of  cube (3x3)
     side = base * base        #  size of the grid (9x9)
@@ -40,11 +40,8 @@ def generate_sudoku():
     solution = [[nums[pattern(r, c)] for c in cols] for r in rows]
 
     return board, solution
-
+# drawing func takes x and y postions title, and block size
 def draw_sudoku(c, sudoku, x_offset, y_offset, title, block_size=30):
-    """
-    Draws the Sudoku puzzle on the canvas, allowing adjustable cell size.
-    """
    # title font, size and psotion 
     c.setFont("Helvetica-Bold", 16)
     c.drawString(x_offset, y_offset + 40, title)
