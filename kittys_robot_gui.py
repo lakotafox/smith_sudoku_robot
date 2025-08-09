@@ -39,6 +39,22 @@ def get_random_inspiration():
         ("Do Not Go Gentle Into That Good Night", "Dylan Thomas",
          "Do not go gentle into that good night,\nOld age should burn and rave at close of day;\nRage, rage against the dying of the light..."),
         
+        # Happy/Uplifting Poems
+        ("A Smile", "Author Unknown",
+         "A smile costs nothing, but gives much.\nIt enriches those who receive,\nwithout making poorer those who give.\nIt takes but a moment, but the memory\nof it sometimes lasts forever."),
+        
+        ("The Optimist", "Author Unknown",
+         "The optimist sees the doughnut,\nThe pessimist sees the hole.\nThe optimist sees the glass half full,\nThe pessimist sees it half empty.\nBe an optimist - life is sweeter that way!"),
+        
+        ("Today", "Author Unknown",
+         "Today is a gift, that's why they call it the present.\nYesterday is history, tomorrow is a mystery.\nToday is all we have - make it count!\nSmile, laugh, love, and be grateful."),
+        
+        ("Sunshine", "Author Unknown",
+         "Keep your face always toward the sunshine\nand shadows will fall behind you.\nEvery day may not be good,\nbut there's something good in every day.\nFind the sunshine in your soul!"),
+        
+        ("Count Your Blessings", "Author Unknown",
+         "When upon life's billows you are tempest tossed,\nWhen you are discouraged, thinking all is lost,\nCount your many blessings, name them one by one,\nAnd it will surprise you what the Lord has done."),
+        
         # LDS Scriptures
         ("Proverbs 3:5-6", "",
          "Trust in the Lord with all thine heart; and lean not unto\nthine own understanding. In all thy ways acknowledge him,\nand he shall direct thy paths."),
