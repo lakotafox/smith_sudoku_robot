@@ -20,7 +20,8 @@ def get_family_quotes():
         "We love your grandma all of us - Kyle",
         "Thanks for being the best great grandma ever - fox kids",
         "We love you from 5 generations down - Ellie and her family",
-        "Never stand when you can sit, and never sit when you can lay down - Carson Daneille and Indie"
+        "Never stand when you can sit, and never sit when you can lay down - Carson Daneille and Indie",
+        "EAT IT OR WEAR IT, who said it? - Kristen"
     ]
     # Return 3 random quotes
     return random.sample(quotes, min(3, len(quotes)))
