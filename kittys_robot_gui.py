@@ -281,8 +281,11 @@ class SudokuGUI:
     def __init__(self, root):
         self.root = root
         self.root.title("Kitty's Sudoku Printer")
-        self.root.geometry("350x280")  # Smaller window
+        self.root.attributes('-fullscreen', True)  # Full screen mode
         self.root.configure(bg='#FFE4E1')  # Misty Rose background
+        
+        # Add escape key to exit fullscreen (helpful for testing)
+        self.root.bind('<Escape>', lambda e: self.root.destroy())
         
         # Main frame - centered
         main_frame = tk.Frame(root, bg='#FFE4E1')
@@ -292,36 +295,36 @@ class SudokuGUI:
         button_frame = tk.Frame(main_frame, bg='#FFE4E1')
         button_frame.pack(pady=50)
         
-        # Three buttons side by side
+        # Three buttons side by side - bigger for fullscreen
         easy_btn = tk.Button(button_frame, text="EASY", 
-                           font=('Arial', 18, 'bold'),
+                           font=('Arial', 48, 'bold'),
                            bg='#90EE90',  # Light Green
                            fg='#006400',  # Dark Green text
-                           width=8, height=2,
+                           width=12, height=3,
                            command=lambda: self.print_puzzle("easy"))
-        easy_btn.grid(row=0, column=0, padx=5)
+        easy_btn.grid(row=0, column=0, padx=20)
         
         medium_btn = tk.Button(button_frame, text="MEDIUM", 
-                             font=('Arial', 18, 'bold'),
+                             font=('Arial', 48, 'bold'),
                              bg='#87CEEB',  # Sky Blue
                              fg='#00008B',  # Dark Blue text
-                             width=8, height=2,
+                             width=12, height=3,
                              command=lambda: self.print_puzzle("medium"))
-        medium_btn.grid(row=0, column=1, padx=5)
+        medium_btn.grid(row=0, column=1, padx=20)
         
         hard_btn = tk.Button(button_frame, text="HARD", 
-                           font=('Arial', 18, 'bold'),
+                           font=('Arial', 48, 'bold'),
                            bg='#FFB6C1',  # Light Pink
                            fg='#8B0000',  # Dark Red text
-                           width=8, height=2,
+                           width=12, height=3,
                            command=lambda: self.print_puzzle("hard"))
-        hard_btn.grid(row=0, column=2, padx=5)
+        hard_btn.grid(row=0, column=2, padx=20)
         
-        # Status label below buttons
+        # Status label below buttons - bigger for fullscreen
         self.status_label = tk.Label(main_frame, text="Choose difficulty to print puzzle", 
-                                   font=('Arial', 12),
+                                   font=('Arial', 24),
                                    bg='#FFE4E1', fg='#4B0082')  # Indigo
-        self.status_label.pack(pady=20)
+        self.status_label.pack(pady=30)
     
     def print_puzzle(self, difficulty):
         self.status_label.config(text="Creating your puzzle...")
