@@ -55,6 +55,22 @@ def get_random_inspiration():
         ("Count Your Blessings", "Author Unknown",
          "When upon life's billows you are tempest tossed,\nWhen you are discouraged, thinking all is lost,\nCount your many blessings, name them one by one,\nAnd it will surprise you what the Lord has done."),
         
+        # Real Grandparent Quotes
+        ("On Grandmothers", "Barbara Cage",
+         "A grandmother is a little bit parent,\na little bit teacher,\nand a little bit best friend."),
+        
+        ("Italian Proverb", "",
+         "If nothing is going well,\ncall your grandmother."),
+        
+        ("The Best Things", "Helen Keller",
+         "The best and most beautiful things in the world\ncannot be seen or even touched.\nThey must be felt with the heart."),
+        
+        ("Grandmother's Power", "Maya Angelou",
+         "To describe my grandmother would be\nto write about a hurricane\nin its perfect power."),
+        
+        ("Welsh Proverb", "",
+         "Perfect love sometimes does not come\nuntil the first grandchild."),
+        
         # LDS Scriptures
         ("Proverbs 3:5-6", "",
          "Trust in the Lord with all thine heart; and lean not unto\nthine own understanding. In all thy ways acknowledge him,\nand he shall direct thy paths."),
@@ -81,7 +97,53 @@ def get_random_inspiration():
          "And again, verily I say unto you, all wholesome herbs\nGod hath ordained for the constitution, nature, and use of man—\nEvery herb in the season thereof, and every fruit in the\nseason thereof; all these to be used with prudence and thanksgiving."),
         
         ("D&C 89:12-13", "Doctrine and Covenants", 
-         "Yea, flesh also of beasts and of the fowls of the air,\nI, the Lord, have ordained for the use of man with thanksgiving;\nnevertheless they are to be used sparingly;\nAnd it is pleasing unto me that they should not be used,\nonly in times of winter, or of cold, or famine.")
+         "Yea, flesh also of beasts and of the fowls of the air,\nI, the Lord, have ordained for the use of man with thanksgiving;\nnevertheless they are to be used sparingly;\nAnd it is pleasing unto me that they should not be used,\nonly in times of winter, or of cold, or famine."),
+        
+        # Additional Positive LDS Scriptures
+        ("2 Nephi 2:25", "Book of Mormon",
+         "Adam fell that men might be;\nand men are, that they might have joy."),
+        
+        ("Mosiah 2:41", "Book of Mormon",
+         "Consider on the blessed and happy state of those\nthat keep the commandments of God. For behold,\nthey are blessed in all things."),
+        
+        ("Ether 12:4", "Book of Mormon",
+         "Wherefore, whoso believeth in God might with surety\nhope for a better world, yea, even a place at the\nright hand of God, which hope cometh of faith,\nmaketh an anchor to the souls of men."),
+        
+        ("D&C 64:33", "Doctrine and Covenants",
+         "Wherefore, be not weary in well-doing,\nfor ye are laying the foundation of a great work.\nAnd out of small things proceedeth that which is great."),
+        
+        ("Alma 7:11-12", "Book of Mormon",
+         "And he shall go forth, suffering pains and afflictions\nand temptations of every kind...that he may know\naccording to the flesh how to succor his people."),
+        
+        ("D&C 121:7-8", "Doctrine and Covenants",
+         "My son, peace be unto thy soul;\nthine adversity and thine afflictions shall be\nbut a small moment; And then, if thou endure it well,\nGod shall exalt thee on high."),
+        
+        ("Mosiah 24:14", "Book of Mormon",
+         "And I will also ease the burdens which are put upon\nyour shoulders, that even you cannot feel them upon\nyour backs, even while you are in bondage."),
+        
+        ("3 Nephi 12:16", "Book of Mormon",
+         "Let your light so shine before this people,\nthat they may see your good works and glorify\nyour Father who is in heaven."),
+        
+        ("D&C 78:19", "Doctrine and Covenants",
+         "And he who receiveth all things with thankfulness\nshall be made glorious; and the things of this earth\nshall be added unto him, even an hundred fold."),
+        
+        ("Alma 26:12", "Book of Mormon",
+         "Yea, I know that I am nothing; as to my strength\nI am weak; therefore I will not boast of myself,\nbut I will boast of my God, for in his strength\nI can do all things."),
+        
+        ("D&C 90:24", "Doctrine and Covenants",
+         "Search diligently, pray always, and be believing,\nand all things shall work together for your good."),
+        
+        ("2 Nephi 31:20", "Book of Mormon",
+         "Wherefore, ye must press forward with a steadfastness\nin Christ, having a perfect brightness of hope,\nand a love of God and of all men."),
+        
+        ("Mosiah 4:9", "Book of Mormon",
+         "Believe in God; believe that he is, and that he\ncreated all things, both in heaven and in earth;\nbelieve that he has all wisdom, and all power."),
+        
+        ("D&C 19:23", "Doctrine and Covenants",
+         "Learn of me, and listen to my words;\nwalk in the meekness of my Spirit,\nand you shall have peace in me."),
+        
+        ("Helaman 5:12", "Book of Mormon",
+         "Remember that it is upon the rock of our Redeemer,\nwho is Christ, the Son of God, that ye must build\nyour foundation...a foundation whereon if men build\nthey cannot fall.")
     ]
     
     return random.choice(inspirations)
