@@ -104,7 +104,7 @@ def generate_sudoku(difficulty="medium"):
     return board, solution
 
 
-def draw_sudoku(c, sudoku, x_offset, y_offset, title, block_size=30, center_title=False, page_width=612, difficulty_label=None):
+def draw_sudoku(c, sudoku, x_offset, y_offset, title, block_size=30, center_title=False, page_width=612, difficulty_label=None, show_difficulty=True):
     if title:
         lines = title.split('\n')
         y_pos = y_offset + 40
@@ -122,8 +122,8 @@ def draw_sudoku(c, sudoku, x_offset, y_offset, title, block_size=30, center_titl
             else:
                 c.drawString(x_offset, y_pos, line)
     
-    # Add difficulty label in top right corner
-    if difficulty_label:
+    # Add difficulty label in top right corner (only if show_difficulty is True)
+    if difficulty_label and show_difficulty:
         c.setFont("Helvetica-Bold", 14)
         label_text = difficulty_label.upper()
         label_width = c.stringWidth(label_text, "Helvetica-Bold", 14)
@@ -197,53 +197,62 @@ def create_pdf(puzzle, solution, difficulty, filename="sudoku_print.pdf"):
     c = canvas.Canvas(filename, pagesize=letter)
     width, height = letter
 
-    block_size = 36
+    block_size = 38  # Increased from 36 for slightly larger puzzles
 
     puzzle_width = block_size * 9
-    x_offset = (width - puzzle_width) // 2
+    x_offset = (width - puzzle_width) // 2  # Center the puzzle
 
-    # Draw title centered at top of first page with difficulty label
+    # Draw title centered at top of first page with difficulty label (only at top)
     draw_sudoku(c, puzzle, x_offset=x_offset, y_offset=height - 75, 
                 title="Kitty's Sudoku Puzzle\nYou are loved by many", block_size=block_size, 
-                center_title=True, page_width=width, difficulty_label=difficulty)
+                center_title=True, page_width=width, difficulty_label=difficulty, show_difficulty=True)
     
-    # Add family quotes below the first puzzle
+    # Add family quotes - split between left and right of first puzzle
     quotes = get_family_quotes()
     c.setFont("Helvetica-Oblique", 10)
-    y_position = height - 410
-    for quote in quotes[:2]:  # Show 2 quotes under first puzzle
-        # Wrap long quotes
-        wrapped_lines = textwrap.wrap(quote, width=70)
-        for line in wrapped_lines:
-            line_width = c.stringWidth(line, "Helvetica-Oblique", 10)
-            c.drawString((width - line_width) / 2, y_position, line)
-            y_position -= 12
-        y_position -= 3
-
-    # Draw second copy of puzzle below the quotes with difficulty label
-    draw_sudoku(c, puzzle, x_offset=x_offset, y_offset=height - 500, 
-                title="", block_size=block_size, difficulty_label=difficulty)
     
-    # Add third quote below second puzzle
+    # First quote on the left
+    if len(quotes) > 0:
+        y_position = height - 180
+        x_position = 30  # Left margin
+        wrapped_lines = textwrap.wrap(quotes[0], width=18)
+        for line in wrapped_lines:
+            c.drawString(x_position, y_position, line)
+            y_position -= 13
+    
+    # Second quote on the right
+    if len(quotes) > 1:
+        y_position = height - 180
+        x_position = x_offset + puzzle_width + 20  # Right of puzzle
+        wrapped_lines = textwrap.wrap(quotes[1], width=18)
+        for line in wrapped_lines:
+            c.drawString(x_position, y_position, line)
+            y_position -= 13
+    
+    # Draw second copy of puzzle below (no difficulty label)
+    draw_sudoku(c, puzzle, x_offset=x_offset, y_offset=height - 450, 
+                title="", block_size=block_size, show_difficulty=False)
+    
+    # Third quote on left of second puzzle
     if len(quotes) > 2:
         c.setFont("Helvetica-Oblique", 10)
-        y_position = height - 840
-        wrapped_lines = textwrap.wrap(quotes[2], width=70)
+        y_position = height - 550
+        x_position = 30  # Left margin
+        wrapped_lines = textwrap.wrap(quotes[2], width=18)
         for line in wrapped_lines:
-            line_width = c.stringWidth(line, "Helvetica-Oblique", 10)
-            c.drawString((width - line_width) / 2, y_position, line)
-            y_position -= 12
+            c.drawString(x_position, y_position, line)
+            y_position -= 13
 
     # Start new page for solution
     c.showPage()
     
-    # Draw solution on second page
+    # Draw solution on second page (no difficulty label)
     draw_sudoku(c, solution, x_offset=x_offset, y_offset=height - 75, 
                 title="Solution", block_size=block_size,
-                center_title=True, page_width=width)
+                center_title=True, page_width=width, show_difficulty=False)
     
     # Add inspiration below solution
-    draw_inspiration(c, height - 500, width)
+    draw_inspiration(c, height - 440, width)
     
     c.save()
 
@@ -272,60 +281,47 @@ class SudokuGUI:
     def __init__(self, root):
         self.root = root
         self.root.title("Kitty's Sudoku Printer")
-        self.root.geometry("500x500")
+        self.root.geometry("350x280")  # Smaller window
         self.root.configure(bg='#FFE4E1')  # Misty Rose background
         
-        # Main frame with color
-        main_frame = tk.Frame(root, bg='#FFE4E1', padx=40, pady=30)
-        main_frame.pack(expand=True, fill='both')
+        # Main frame - centered
+        main_frame = tk.Frame(root, bg='#FFE4E1')
+        main_frame.pack(expand=True)
         
-        # Title with larger font
-        title_label = tk.Label(main_frame, text="Kitty's Sudoku Printer", 
-                              font=('Arial', 28, 'bold'),
-                              bg='#FFE4E1', fg='#8B008B')  # Dark Magenta text
-        title_label.pack(pady=20)
-        
-        # Instructions
-        instruction_label = tk.Label(main_frame, 
-                                   text="Click a button to print your puzzle!", 
-                                   font=('Arial', 16),
-                                   bg='#FFE4E1', fg='#4B0082')  # Indigo text
-        instruction_label.pack(pady=15)
-        
-        # Button frame
+        # Button frame - horizontal layout
         button_frame = tk.Frame(main_frame, bg='#FFE4E1')
-        button_frame.pack(pady=30)
+        button_frame.pack(pady=50)
         
-        # Large colorful buttons
+        # Three buttons side by side
         easy_btn = tk.Button(button_frame, text="EASY", 
-                           font=('Arial', 20, 'bold'),
+                           font=('Arial', 18, 'bold'),
                            bg='#90EE90',  # Light Green
                            fg='#006400',  # Dark Green text
-                           width=10, height=2,
+                           width=8, height=2,
                            command=lambda: self.print_puzzle("easy"))
-        easy_btn.pack(pady=10)
+        easy_btn.grid(row=0, column=0, padx=5)
         
         medium_btn = tk.Button(button_frame, text="MEDIUM", 
-                             font=('Arial', 20, 'bold'),
+                             font=('Arial', 18, 'bold'),
                              bg='#87CEEB',  # Sky Blue
                              fg='#00008B',  # Dark Blue text
-                             width=10, height=2,
+                             width=8, height=2,
                              command=lambda: self.print_puzzle("medium"))
-        medium_btn.pack(pady=10)
+        medium_btn.grid(row=0, column=1, padx=5)
         
         hard_btn = tk.Button(button_frame, text="HARD", 
-                           font=('Arial', 20, 'bold'),
+                           font=('Arial', 18, 'bold'),
                            bg='#FFB6C1',  # Light Pink
                            fg='#8B0000',  # Dark Red text
-                           width=10, height=2,
+                           width=8, height=2,
                            command=lambda: self.print_puzzle("hard"))
-        hard_btn.pack(pady=10)
+        hard_btn.grid(row=0, column=2, padx=5)
         
-        # Status label
-        self.status_label = tk.Label(main_frame, text="", 
-                                   font=('Arial', 14),
-                                   bg='#FFE4E1', fg='#FF1493')  # Deep Pink
-        self.status_label.pack(pady=10)
+        # Status label below buttons
+        self.status_label = tk.Label(main_frame, text="Choose difficulty to print puzzle", 
+                                   font=('Arial', 12),
+                                   bg='#FFE4E1', fg='#4B0082')  # Indigo
+        self.status_label.pack(pady=20)
     
     def print_puzzle(self, difficulty):
         self.status_label.config(text="Creating your puzzle...")
